@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { nav, socials, site } from "@/lib/site";
 import ArrowLink from "@/components/ui/ArrowLink";
 import Logo from "@/components/ui/Logo";
+import Wordmark from "@/components/ui/Wordmark";
 
 export default function Footer() {
   return (
@@ -49,11 +50,8 @@ export default function Footer() {
       <div className="container-x grid grid-cols-2 gap-10 py-16 md:grid-cols-4">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-2.5">
-            <Logo className="h-6 w-6" />
-            <span className="flex items-baseline gap-1.5">
-              <span className="display text-base text-gold">Maby</span>
-              <span className="display text-base text-white">Connect</span>
-            </span>
+            <Logo className="h-9 w-9" />
+            <Wordmark className="text-[0.8rem]" />
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-mist">
             {site.tagline}

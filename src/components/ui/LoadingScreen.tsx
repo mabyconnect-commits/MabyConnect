@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "@/components/ui/Logo";
+import Wordmark from "@/components/ui/Wordmark";
 
 /**
  * Premium first-load screen. Shows once per browser session.
@@ -71,14 +72,8 @@ export default function LoadingScreen() {
               initial={{ y: "110%" }}
               animate={{ y: 0 }}
               transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-baseline gap-3"
             >
-              <span className="display text-[clamp(2.5rem,9vw,6rem)] text-gold">
-                Maby
-              </span>
-              <span className="display text-[clamp(2.5rem,9vw,6rem)] text-white">
-                Connect
-              </span>
+              <Wordmark className="text-center text-[clamp(2rem,8vw,5rem)] tracking-[0.16em]" />
             </motion.div>
           </div>
 

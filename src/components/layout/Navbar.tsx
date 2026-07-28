@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-
 import { nav, socials, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/ui/Logo";
+import Wordmark from "@/components/ui/Wordmark";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -47,11 +48,8 @@ export default function Navbar() {
             className="group relative z-[95] flex items-center gap-2.5"
             aria-label="Maby Connect — home"
           >
-            <Logo className="h-7 w-7 transition-transform duration-500 group-hover:rotate-[-8deg]" />
-            <span className="flex items-baseline gap-1.5">
-              <span className="display text-lg tracking-tight text-gold">Maby</span>
-              <span className="display text-lg tracking-tight text-white">Connect</span>
-            </span>
+            <Logo className="h-8 w-8 transition-transform duration-500 group-hover:rotate-[-8deg]" />
+            <Wordmark className="text-[0.72rem] sm:text-[0.8rem]" />
           </Link>
 
           {/* Desktop nav */}
