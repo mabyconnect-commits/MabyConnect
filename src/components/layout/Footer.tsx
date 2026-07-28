@@ -50,8 +50,8 @@ export default function Footer() {
       <div className="container-x grid grid-cols-2 gap-10 py-16 md:grid-cols-4">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-2.5">
-            <Logo className="h-9 w-9" />
-            <Wordmark className="text-[0.8rem]" />
+            <Logo className="h-7 w-7" />
+            <Wordmark className="text-sm" />
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-mist">
             {site.tagline}

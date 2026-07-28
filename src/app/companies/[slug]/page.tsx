@@ -110,17 +110,12 @@ export default async function CompanyPage({
           <div className="relative flex aspect-[16/7] items-center justify-center overflow-hidden rounded-3xl border border-line bg-surface">
             <div className="absolute left-1/2 top-1/2 h-[60%] w-[60%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.08] blur-[100px]" />
             {company.logo ? (
-              <div className="flex flex-col items-center gap-6">
-                <CompanyLogo
-                  name={company.name}
-                  logo={company.logo}
-                  size={128}
-                  className="rounded-3xl shadow-2xl shadow-black/40"
-                />
-                <span className="display text-center text-[clamp(1.25rem,4vw,2.5rem)] text-outline">
-                  {company.name.split(" ")[0]}
-                </span>
-              </div>
+              <CompanyLogo
+                name={company.name}
+                logo={company.logo}
+                size={140}
+                className="rounded-3xl shadow-2xl shadow-black/40"
+              />
             ) : (
               <span className="display px-6 text-center text-[clamp(2rem,7vw,5rem)] text-outline">
                 {company.name.split(" ")[0]}

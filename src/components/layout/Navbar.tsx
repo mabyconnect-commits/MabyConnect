@@ -48,8 +48,8 @@ export default function Navbar() {
             className="group relative z-[95] flex items-center gap-2.5"
             aria-label="Maby Connect — home"
           >
-            <Logo className="h-8 w-8 transition-transform duration-500 group-hover:rotate-[-8deg]" />
-            <Wordmark className="text-[0.72rem] sm:text-[0.8rem]" />
+            <Logo className="h-7 w-7 transition-transform duration-500 group-hover:rotate-[-8deg]" />
+            <Wordmark className="text-sm sm:text-base" />
           </Link>
 
           {/* Desktop nav */}

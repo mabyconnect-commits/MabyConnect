@@ -73,7 +73,7 @@ export default function LoadingScreen() {
               animate={{ y: 0 }}
               transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Wordmark className="text-center text-[clamp(2rem,8vw,5rem)] tracking-[0.16em]" />
+              <Wordmark className="text-[clamp(1.4rem,6.5vw,4rem)] tracking-[0.1em]" />
             </motion.div>
           </div>
 

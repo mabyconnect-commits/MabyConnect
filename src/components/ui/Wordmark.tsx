@@ -19,16 +19,13 @@ export default function Wordmark({
   return (
     <span
       className={cn(
-        "font-sans font-bold uppercase leading-[0.95] tracking-[0.24em]",
+        "font-sans font-bold whitespace-nowrap uppercase tracking-[0.2em]",
         tone === "dark" ? "text-ink" : "text-white",
         className,
       )}
       aria-label="Maby Connect"
     >
-      <span className="block">Maby</span>
-      <span className="block">
-        C<span className="text-gold">o</span>nnect
-      </span>
+      Maby C<span className="text-gold">o</span>nnect
     </span>
   );
 }
