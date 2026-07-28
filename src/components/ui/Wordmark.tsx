@@ -1,9 +1,8 @@
 import { cn } from "@/lib/utils";
 
 /**
- * The official "MABY CONNECT" wordmark lockup: stacked on two lines,
- * all-caps, widely tracked, with the gold "O" in CONNECT — matching the
- * brand logo.
+ * The official "MABY CONNECT" wordmark lockup: a single line, all-caps,
+ * widely tracked, with the gold "O" in CONNECT — matching the brand logo.
  *
  * `tone` sets the letter colour: "light" (white — for dark backgrounds,
  * the default) or "dark" (near-black — for light backgrounds). The gold
