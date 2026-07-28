@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Portrait placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#141414"/>
+      <stop offset="0.55" stop-color="#0d0d0d"/>
+      <stop offset="1" stop-color="#070707"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.36" r="0.6">
+      <stop offset="0" stop-color="#d6b35a" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#d6b35a" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="0.6"/></filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg)"/>
+  <rect width="800" height="1000" fill="url(#glow)"/>
+
+  <!-- Editorial silhouette -->
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.16" stroke-width="1.4" filter="url(#soft)">
+    <path d="M400 300 C330 300 300 355 300 415 C300 470 330 505 340 520 C300 545 235 585 205 660 C182 715 175 800 175 880 L625 880 C625 800 618 715 595 660 C565 585 500 545 460 520 C470 505 500 470 500 415 C500 355 470 300 400 300 Z"/>
+  </g>
+  <g fill="#ffffff" fill-opacity="0.05">
+    <path d="M400 305 C335 305 305 358 305 415 C305 468 334 500 345 516 C305 540 242 582 213 655 C192 708 185 792 185 872 L615 872 C615 792 608 708 587 655 C558 582 495 540 455 516 C466 500 495 468 495 415 C495 358 465 305 400 305 Z"/>
+  </g>
+
+  <!-- Monogram -->
+  <text x="400" y="600" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="240" fill="#ffffff" fill-opacity="0.06" letter-spacing="-8">MA</text>
+
+  <!-- Frame -->
+  <rect x="28" y="28" width="744" height="944" fill="none" stroke="#d6b35a" stroke-opacity="0.28" stroke-width="1"/>
+
+  <!-- Labels -->
+  <text x="52" y="80" font-family="ui-monospace, monospace" font-size="15" letter-spacing="6" fill="#ffffff" fill-opacity="0.4">MATTHEW ADELEYE</text>
+  <text x="52" y="948" font-family="ui-monospace, monospace" font-size="13" letter-spacing="6" fill="#ffffff" fill-opacity="0.32">MABY CONNECT — FOUNDER</text>
+  <text x="748" y="948" text-anchor="end" font-family="ui-monospace, monospace" font-size="13" letter-spacing="4" fill="#d6b35a" fill-opacity="0.6">/ PORTRAIT</text>
+
+  <rect width="800" height="1000" filter="url(#grain)" opacity="0.5"/>
+</svg>

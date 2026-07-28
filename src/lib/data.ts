@@ -1,0 +1,337 @@
+/* ============================================================
+   Central content model for Maby Connect
+   ============================================================ */
+
+export type Company = {
+  slug: string;
+  name: string;
+  tagline: string;
+  category: string;
+  year: string;
+  status: "Live" | "Building" | "Scaling";
+  summary: string;
+  description: string[];
+  highlights: string[];
+  accent?: boolean;
+  url?: string;
+};
+
+export const companies: Company[] = [
+  {
+    slug: "channels-realty",
+    name: "Channels Realty Innovation Ltd",
+    tagline: "Making real estate accessible to everyone.",
+    category: "Real Estate",
+    year: "2022",
+    status: "Scaling",
+    summary:
+      "A modern real estate company opening the door to property ownership and investment for everyday people.",
+    description: [
+      "Channels Realty Innovation exists to dismantle the barriers that have kept property ownership out of reach for most people.",
+      "We combine trusted advisory, flexible structures and genuine transparency so that buying, investing and building wealth through real estate feels achievable — not intimidating.",
+      "The mission is simple: make real estate accessible to everyone, everywhere.",
+    ],
+    highlights: [
+      "Accessible ownership models",
+      "Verified listings & advisory",
+      "Local and diaspora investors",
+    ],
+    accent: true,
+  },
+  {
+    slug: "surlink",
+    name: "Surlink",
+    tagline: "Connecting customers with trusted service providers around them.",
+    category: "Technology · Marketplace",
+    year: "2023",
+    status: "Building",
+    summary:
+      "Like Uber for service professionals — the fastest way to find trusted, vetted help near you.",
+    description: [
+      "Surlink connects everyday customers with trusted service providers around them — plumbers, stylists, technicians, tutors and more.",
+      "Think Uber, but for service professionals: request, match, and get things done with people you can trust.",
+      "We are building the infrastructure of local trust — reputation, reliability and reach in one place.",
+    ],
+    highlights: [
+      "On-demand matching",
+      "Verified provider network",
+      "Reputation & reviews",
+    ],
+  },
+  {
+    slug: "groceries",
+    name: "Groceries",
+    tagline: "Raw and ready-made food, delivered.",
+    category: "Commerce · Logistics",
+    year: "2023",
+    status: "Live",
+    summary:
+      "Raw and ready-made food delivered locally and internationally — bringing home closer, wherever you are.",
+    description: [
+      "Groceries delivers raw and ready-made food both locally and internationally.",
+      "Whether it's fresh ingredients for the kitchen or a taste of home shipped across borders, we make good food effortless to access.",
+      "Convenience, quality and reach — built for families at home and abroad.",
+    ],
+    highlights: [
+      "Local & international delivery",
+      "Raw and ready-made",
+      "Diaspora-friendly",
+    ],
+  },
+  {
+    slug: "future-ventures",
+    name: "Future Ventures",
+    tagline: "The next companies, already in motion.",
+    category: "Incubation",
+    year: "2025 →",
+    status: "Building",
+    summary:
+      "A pipeline of products in crypto, technology and community — built with the same conviction and care.",
+    description: [
+      "Future Ventures is the home for what comes next — the ideas being researched, prototyped and launched under the Maby Connect umbrella.",
+      "From launchpads and web3 products to community infrastructure, each venture is built to solve a real problem and to help people grow.",
+      "If you're building something bold, this is where partnership begins.",
+    ],
+    highlights: ["Web3 & launchpads", "Community infrastructure", "Selective partnerships"],
+  },
+];
+
+export type Project = {
+  title: string;
+  domain: string;
+  year: string;
+  blurb: string;
+};
+
+export const projects: Project[] = [
+  {
+    title: "Memecoin Research Desk",
+    domain: "Crypto",
+    year: "2024",
+    blurb:
+      "Deep on-chain research and market analysis identifying early opportunities and separating signal from noise.",
+  },
+  {
+    title: "Token Launchpad",
+    domain: "Web3",
+    year: "2024",
+    blurb:
+      "End-to-end launchpad design — from tokenomics and UX to go-to-market — helping projects launch with credibility.",
+  },
+  {
+    title: "Product Design Sprints",
+    domain: "Product",
+    year: "2023",
+    blurb:
+      "Rapid design and validation for early-stage startups turning raw ideas into shippable, testable products.",
+  },
+  {
+    title: "Brand & Positioning",
+    domain: "Strategy",
+    year: "2023",
+    blurb:
+      "Refined the identity, narrative and positioning of multiple ventures into clear, ownable brands.",
+  },
+  {
+    title: "Growth & Go-To-Market",
+    domain: "Consulting",
+    year: "2022",
+    blurb:
+      "Advised startups on strategy and scaling — from first users to sustainable, repeatable growth.",
+  },
+  {
+    title: "Community Systems",
+    domain: "Community",
+    year: "2022",
+    blurb:
+      "Designed and grew engaged online communities with rituals, structure and a genuine sense of belonging.",
+  },
+];
+
+export type Community = {
+  name: string;
+  purpose: string;
+  description: string;
+  channel: "Telegram" | "WhatsApp" | "Discord";
+  cta: string;
+};
+
+export const communities: Community[] = [
+  {
+    name: "AllRound Growth",
+    purpose: "Grow in every area of life.",
+    description:
+      "Faith. Finance. Business. Health. Relationships. A community built to help you become whole — not just successful.",
+    channel: "Telegram",
+    cta: "Join AllRound Growth",
+  },
+  {
+    name: "The Praying Community",
+    purpose: "Seeking God together through prayer.",
+    description:
+      "A gathering of believers who pray, encourage and grow in faith together. Everything begins here.",
+    channel: "WhatsApp",
+    cta: "Join The Praying Community",
+  },
+];
+
+export const communityChannels = ["Telegram", "WhatsApp", "Discord"] as const;
+
+export type TimelineItem = {
+  year: string;
+  title: string;
+  body: string;
+};
+
+export const timeline: TimelineItem[] = [
+  {
+    year: "Foundation",
+    title: "First, a lover of God",
+    body: "Everything I build comes from that foundation. Faith is not a category of my life — it is the ground beneath all of it.",
+  },
+  {
+    year: "University of Calabar",
+    title: "Applied Geophysics",
+    body: "I studied the science of the earth — learning to read complex systems, gather signal from noise, and think in models. It shaped how I build.",
+  },
+  {
+    year: "The Builder Emerges",
+    title: "Companies & communities",
+    body: "I began building — real estate, technology, commerce and community — driven by a simple conviction: solve real problems and help people grow.",
+  },
+  {
+    year: "Crypto & Web3",
+    title: "Trading, research, building",
+    body: "Professional trader, memecoin researcher and web3 builder. I design products and launchpads at the frontier of what money is becoming.",
+  },
+  {
+    year: "Impact",
+    title: "Foundation & philanthropy",
+    body: "Jenmec Foundation — feeding the hungry, supporting children, creating opportunity. I am because we are.",
+  },
+  {
+    year: "The Future",
+    title: "Building what's next",
+    body: "More companies. More communities. More people helped to grow — financially, spiritually and personally. The work has only begun.",
+  },
+];
+
+export const disciplines = [
+  "Crypto",
+  "Technology",
+  "Real Estate",
+  "Community",
+  "Product Building",
+  "Project Management",
+  "Business Strategy",
+  "Faith",
+  "Philanthropy",
+] as const;
+
+export const cryptoRoles = [
+  "Professional Crypto Trader",
+  "Memecoin Researcher",
+  "Web3 Builder",
+  "Product Designer",
+  "Launchpad Builder",
+  "Blockchain Enthusiast",
+] as const;
+
+export const stats = [
+  { value: 6, suffix: "+", label: "Companies & ventures" },
+  { value: 9, suffix: "", label: "Industries" },
+  { value: 2, suffix: "", label: "Communities" },
+  { value: 1, prefix: "", suffix: "", label: "Foundation", display: "Ubuntu" },
+] as const;
+
+export const buildValues = [
+  { k: "I build", v: "Companies" },
+  { k: "I build", v: "Communities" },
+  { k: "I build", v: "Opportunities" },
+  { k: "I build", v: "People" },
+] as const;
+
+export type Article = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  readingTime: string;
+  body: string[];
+};
+
+export const articles: Article[] = [
+  {
+    slug: "build-from-foundation",
+    title: "Why I build from foundation, not ambition",
+    excerpt:
+      "Ambition burns out. Foundation endures. A reflection on building companies that outlast the hype.",
+    category: "Philosophy",
+    date: "2026-05-12",
+    readingTime: "5 min",
+    body: [
+      "Everything I build begins in the same place: my faith. Before I am a founder, a trader or a builder, I am a lover of God. That is not a footnote — it is the foundation.",
+      "Ambition is a good engine but a poor foundation. It gets you moving, but it cannot tell you when to stop, who to serve, or why any of it matters. Foundation can.",
+      "When you build from foundation, the questions change. Instead of 'how big can this get?' you ask 'what real problem does this solve, and who does it help grow?' The scale still comes — but it comes as a consequence, not a goal.",
+      "That is the quiet secret behind every company under Maby Connect. Real estate that opens doors. Technology that builds trust. Food that reaches home. A foundation that feeds the hungry. Different problems, one root.",
+      "Build from foundation. The ambition will take care of itself.",
+    ],
+  },
+  {
+    slug: "uber-for-trust",
+    title: "Surlink and the infrastructure of local trust",
+    excerpt:
+      "The next great marketplace isn't about products — it's about trust. Here's how we're building it.",
+    category: "Product",
+    date: "2026-04-03",
+    readingTime: "6 min",
+    body: [
+      "Every day, millions of people need something done — a pipe fixed, a service rendered, a skill hired. And every day, the hardest part isn't the work. It's trust.",
+      "Surlink exists to solve exactly that. Think of it as Uber for service professionals: request, match, and get things done with people you can actually rely on.",
+      "But the real product isn't the matching — it's the trust layer underneath it. Reputation. Reliability. Verification. That is the infrastructure most local economies are missing.",
+      "When trust becomes searchable, everything changes. A skilled professional in an overlooked neighborhood becomes discoverable. A customer stops gambling on strangers. Value flows to the people who earn it.",
+      "That's the future we're building — one trusted connection at a time.",
+    ],
+  },
+  {
+    slug: "i-am-because-we-are",
+    title: "I am because we are",
+    excerpt:
+      "On Ubuntu, the Jenmec Foundation, and why impact is the point of everything.",
+    category: "Impact",
+    date: "2026-02-18",
+    readingTime: "4 min",
+    body: [
+      "There is a word — Ubuntu — that carries an entire philosophy: I am because we are.",
+      "It means my humanity is bound up in yours. That success I keep only for myself is not success at all. That the measure of what I build is finally the good it does for others.",
+      "The Jenmec Foundation is where this belief becomes action. Feeding the hungry. Supporting children. Creating opportunity where there was none.",
+      "Business and impact are not two separate tracks in my life. They are the same track. The companies fund the mission; the mission gives the companies meaning.",
+      "I am because we are. Everything I build is an attempt to live that sentence honestly.",
+    ],
+  },
+];
+
+export type MediaItem = {
+  title: string;
+  type: "Podcast" | "Talk" | "Feature" | "Interview";
+  outlet: string;
+  date: string;
+};
+
+export const mediaItems: MediaItem[] = [
+  { title: "Building companies from faith and conviction", type: "Podcast", outlet: "The Builder's Room", date: "2026-06" },
+  { title: "Web3, launchpads and the future of ownership", type: "Talk", outlet: "Crypto Futures Summit", date: "2026-05" },
+  { title: "Ubuntu in business: profit with purpose", type: "Interview", outlet: "Impact Weekly", date: "2026-03" },
+  { title: "Founder spotlight: Maby Connect", type: "Feature", outlet: "Startup Stories", date: "2026-01" },
+  { title: "Real estate for everyone", type: "Talk", outlet: "Property & People", date: "2025-11" },
+  { title: "From geophysics to founding companies", type: "Interview", outlet: "The Long Game", date: "2025-09" },
+];
+
+export const contactTopics = [
+  "Business enquiries",
+  "Speaking",
+  "Partnerships",
+  "Investments",
+  "Consulting",
+] as const;
