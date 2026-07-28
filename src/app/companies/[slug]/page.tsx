@@ -38,8 +38,32 @@ export default async function CompanyPage({
   const index = companies.findIndex((c) => c.slug === slug);
   const next = companies[(index + 1) % companies.length];
 
+  const facts = [
+    { label: "Category", value: company.category },
+    { label: "Founded", value: company.year },
+    { label: "Status", value: company.status },
+    ...(company.role ? [{ label: "Role", value: company.role }] : []),
+    ...(company.url
+      ? [{ label: "Website", value: company.url.replace(/^https?:\/\//, "") }]
+      : []),
+  ];
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: company.name,
+    description: company.summary,
+    ...(company.url ? { url: company.url } : {}),
+    ...(company.year ? { foundingDate: company.year.replace(/\D/g, "") } : {}),
+    knowsAbout: company.category.split("·").map((c) => c.trim()),
+  };
+
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="container-x pt-36 pb-16 md:pt-48 md:pb-20">
         <Reveal>
           <Link
@@ -103,6 +127,21 @@ export default async function CompanyPage({
         </div>
 
         <Reveal delay={0.1} className="h-fit md:sticky md:top-28">
+          <p className="eyebrow mb-6">At a glance</p>
+          <dl className="mb-12 divide-y divide-line rounded-2xl border border-line">
+            {facts.map((f) => (
+              <div
+                key={f.label}
+                className="flex items-baseline justify-between gap-6 px-5 py-3.5"
+              >
+                <dt className="font-mono text-[10px] tracking-widest text-faint uppercase">
+                  {f.label}
+                </dt>
+                <dd className="text-right text-sm text-white/80">{f.value}</dd>
+              </div>
+            ))}
+          </dl>
+
           <p className="eyebrow mb-6">Highlights</p>
           <ul className="space-y-4">
             {company.highlights.map((h) => (
