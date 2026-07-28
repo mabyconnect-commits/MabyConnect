@@ -80,7 +80,8 @@ export default async function OpengraphImage() {
             ) : (
               <div style={{ width: 12, height: 12, borderRadius: 12, background: "#d6b35a" }} />
             )}
-            MABY CONNECT
+            <span style={{ color: "#d6b35a" }}>MABY</span>
+            <span style={{ color: "rgba(255,255,255,0.7)" }}>CONNECT</span>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column" }}>

@@ -73,10 +73,10 @@ export default function LoadingScreen() {
               transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-baseline gap-3"
             >
-              <span className="display text-[clamp(2.5rem,9vw,6rem)] text-white">
+              <span className="display text-[clamp(2.5rem,9vw,6rem)] text-gold">
                 Maby
               </span>
-              <span className="display text-[clamp(2.5rem,9vw,6rem)] text-outline">
+              <span className="display text-[clamp(2.5rem,9vw,6rem)] text-white">
                 Connect
               </span>
             </motion.div>

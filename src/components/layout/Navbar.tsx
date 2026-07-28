@@ -49,10 +49,8 @@ export default function Navbar() {
           >
             <Logo className="h-7 w-7 transition-transform duration-500 group-hover:rotate-[-8deg]" />
             <span className="flex items-baseline gap-1.5">
-              <span className="display text-lg tracking-tight text-white">Maby</span>
-              <span className="display text-lg tracking-tight text-white/55 transition-colors group-hover:text-white">
-                Connect
-              </span>
+              <span className="display text-lg tracking-tight text-gold">Maby</span>
+              <span className="display text-lg tracking-tight text-white">Connect</span>
             </span>
           </Link>
 

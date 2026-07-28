@@ -51,8 +51,8 @@ export default function Footer() {
           <div className="flex items-center gap-2.5">
             <Logo className="h-6 w-6" />
             <span className="flex items-baseline gap-1.5">
-              <span className="display text-base text-white">Maby</span>
-              <span className="display text-base text-white/60">Connect</span>
+              <span className="display text-base text-gold">Maby</span>
+              <span className="display text-base text-white">Connect</span>
             </span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-mist">
