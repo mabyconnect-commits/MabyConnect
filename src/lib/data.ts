@@ -303,7 +303,7 @@ export const cryptoRoles = [
 export const stats = [
   { value: 6, suffix: "+", label: "Companies & ventures" },
   { value: 9, suffix: "", label: "Industries" },
-  { value: 2, suffix: "", label: "Communities" },
+  { value: 5, suffix: "", label: "Communities & channels" },
   { value: 1, prefix: "", suffix: "", label: "Foundation", display: "Ubuntu" },
 ] as const;
 
