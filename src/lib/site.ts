@@ -1,8 +1,22 @@
+/**
+ * Canonical site URL. Resolved at build time so metadata, Open Graph,
+ * sitemap and robots always point at the real deployment:
+ *   1. NEXT_PUBLIC_SITE_URL — set this to your custom domain (recommended)
+ *   2. VERCEL_PROJECT_PRODUCTION_URL — auto-provided by Vercel in production
+ *   3. fallback to the intended production domain
+ */
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://mabyconnect.com")
+).replace(/\/$/, "");
+
 export const site = {
   name: "Maby Connect",
   person: "Matthew Adeleye",
   role: "Founder · Builder · Believer",
-  url: "https://mabyconnect.com",
+  url: siteUrl,
   email: "hello@mabyconnect.com",
   tagline: "Building companies. Building communities. Building people.",
   description:

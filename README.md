@@ -82,6 +82,19 @@ It currently validates input and logs the enquiry on the server. To make it
 live, integrate an email/CRM provider (e.g. Resend, Postmark, or a webhook) at
 the `TODO` marker inside `submitContact`.
 
+## Deploying to Vercel
+
+The project is a standard Next.js app and deploys with zero configuration:
+
+1. Push this branch to GitHub and **Import** the repo in Vercel (it auto-detects
+   Next.js — no build settings needed).
+2. Optional but recommended: set `NEXT_PUBLIC_SITE_URL` to your final domain so
+   canonical/Open Graph/sitemap URLs are correct. In production Vercel otherwise
+   derives it from `VERCEL_PROJECT_PRODUCTION_URL` automatically.
+3. Deploy. That's it — no database or other services are required.
+
+See `.env.example` for the (single, optional) environment variable.
+
 ## Editing content
 
 Almost all copy lives in `src/lib/data.ts` and `src/lib/site.ts` — companies,
