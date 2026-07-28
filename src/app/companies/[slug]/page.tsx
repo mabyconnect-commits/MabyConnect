@@ -55,6 +55,7 @@ export default async function CompanyPage({
             {company.status}
           </span>
           <span className="font-mono text-xs text-faint">
+            {company.role ? `${company.role} · ` : ""}
             {company.category} · Est. {company.year}
           </span>
         </div>

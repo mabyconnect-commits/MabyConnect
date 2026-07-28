@@ -14,28 +14,32 @@ export type Company = {
   highlights: string[];
   accent?: boolean;
   url?: string;
+  role?: string;
 };
 
 export const companies: Company[] = [
   {
     slug: "channels-realty",
     name: "Channels Realty Innovation Ltd",
-    tagline: "Making real estate accessible to everyone.",
+    tagline: "Real estate every class can afford.",
     category: "Real Estate",
     year: "2022",
     status: "Scaling",
+    role: "Co-Founder",
     summary:
-      "A modern real estate company opening the door to property ownership and investment for everyday people.",
+      "The channel that bridges real estate businesses to the right people — making property accessible from as little as ₦20,000.",
     description: [
-      "Channels Realty Innovation exists to dismantle the barriers that have kept property ownership out of reach for most people.",
-      "We combine trusted advisory, flexible structures and genuine transparency so that buying, investing and building wealth through real estate feels achievable — not intimidating.",
-      "The mission is simple: make real estate accessible to everyone, everywhere.",
+      "Channels Realty Innovation acts as a channel and a bridge: connecting real estate businesses to the people and the targeted audiences they're trying to reach.",
+      "In doing so, we make property accessible across every class — you can get in from as little as ₦20,000, dismantling the barriers that have long kept real estate out of reach for most people.",
+      "Trusted advisory, flexible structures and genuine transparency turn what once felt intimidating into something achievable for everyone.",
     ],
     highlights: [
-      "Accessible ownership models",
-      "Verified listings & advisory",
-      "Local and diaspora investors",
+      "Bridge for real estate businesses",
+      "Reach the right audience",
+      "Start from as low as ₦20,000",
+      "Accessible to every class",
     ],
+    url: "https://channels.realty",
     accent: true,
   },
   {
@@ -86,22 +90,24 @@ export const companies: Company[] = [
   {
     slug: "groceries",
     name: "Groceries",
-    tagline: "Raw and ready-made food, delivered.",
-    category: "Commerce · Logistics",
+    tagline: "Gift food to the people you love — anywhere.",
+    category: "Food · Commerce",
     year: "2023",
     status: "Live",
     summary:
-      "Raw and ready-made food delivered locally and internationally — bringing home closer, wherever you are.",
+      "A food brand that lets you gift family and friends food subscriptions from any part of the world — raw ingredients and ready-made dishes alike.",
     description: [
-      "Groceries delivers raw and ready-made food both locally and internationally.",
-      "Whether it's fresh ingredients for the kitchen or a taste of home shipped across borders, we make good food effortless to access.",
-      "Convenience, quality and reach — built for families at home and abroad.",
+      "Groceries is a food brand built around a simple, warm idea: let people gift food. From any part of the world, you can send family and friends a food subscription that keeps them fed and cared for.",
+      "We deal in all kinds of food — both raw ingredients for the kitchen and ready-made dishes — and Groceries gets you tailored dishes that fit your needs, not a one-size-fits-all menu.",
+      "It's love, delivered: convenience, quality and reach for families at home and abroad.",
     ],
     highlights: [
-      "Local & international delivery",
-      "Raw and ready-made",
-      "Diaspora-friendly",
+      "Giftable food subscriptions",
+      "Send from anywhere in the world",
+      "Raw & ready-made dishes",
+      "Tailored to your needs",
     ],
+    url: "https://whygroceries.com",
   },
   {
     slug: "future-ventures",

@@ -46,6 +46,7 @@ export default function CompaniesPage() {
                     {c.summary}
                   </p>
                   <div className="mt-5 flex flex-wrap gap-x-6 gap-y-1 font-mono text-xs text-faint">
+                    {c.role && <span className="text-white/60">{c.role}</span>}
                     <span>{c.category}</span>
                     <span>Est. {c.year}</span>
                     {c.url && (
