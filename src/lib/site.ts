@@ -18,6 +18,8 @@ export const site = {
   role: "Founder · Builder · Believer",
   url: siteUrl,
   email: "hello@mabyconnect.com",
+  phone: "0913 621 4038",
+  phoneHref: "tel:+2349136214038",
   tagline: "Building companies. Building communities. Building people.",
   description:
     "Matthew Adeleye — known as Maby Connect — is a founder building companies, communities and products that create global impact across crypto, technology, real estate and faith.",
@@ -37,9 +39,10 @@ export const nav = [
 ] as const;
 
 export const socials = [
-  { label: "X / Twitter", handle: "@mabyconnect", href: "https://x.com/mabyconnect" },
-  { label: "Instagram", handle: "@mabyconnect", href: "https://instagram.com/mabyconnect" },
-  { label: "LinkedIn", handle: "Matthew Adeleye", href: "https://linkedin.com/in/mabyconnect" },
-  { label: "Telegram", handle: "@mabyconnect", href: "https://t.me/mabyconnect" },
-  { label: "YouTube", handle: "Maby Connect", href: "https://youtube.com/@mabyconnect" },
+  { label: "X / Twitter", handle: "@OxMaby", href: "https://x.com/OxMaby" },
+  { label: "Instagram", handle: "@mabyconnect247", href: "https://www.instagram.com/mabyconnect247" },
+  { label: "TikTok", handle: "@mabyconnect01", href: "https://www.tiktok.com/@mabyconnect01" },
+  { label: "Facebook", handle: "Maby Connect", href: "https://www.facebook.com/share/1gJxYuUTNP/" },
+  { label: "LinkedIn", handle: "Maby Connect", href: "https://www.linkedin.com/in/maby-connect-aa074a276" },
+  { label: "Telegram", handle: "@Mabyconnect2000", href: "https://t.me/Mabyconnect2000" },
 ] as const;

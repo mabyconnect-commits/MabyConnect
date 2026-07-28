@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
 import ArrowLink from "@/components/ui/ArrowLink";
+import Portrait from "@/components/ui/Portrait";
 import ContactForm from "./ContactForm";
 import { site, socials } from "@/lib/site";
 import { contactTopics } from "@/lib/data";
@@ -29,13 +30,28 @@ export default function ContactPage() {
 
         <aside className="space-y-12">
           <Reveal>
+            <Portrait
+              src="/portrait-founder.jpg"
+              className="aspect-[3/4] w-full"
+            />
+          </Reveal>
+
+          <Reveal>
             <p className="eyebrow mb-4">Direct</p>
-            <a
-              href={`mailto:${site.email}`}
-              className="text-xl text-white transition-colors hover:text-gold"
-            >
-              {site.email}
-            </a>
+            <div className="space-y-2">
+              <a
+                href={`mailto:${site.email}`}
+                className="block text-xl text-white transition-colors hover:text-gold"
+              >
+                {site.email}
+              </a>
+              <a
+                href={site.phoneHref}
+                className="block text-xl text-white transition-colors hover:text-gold"
+              >
+                {site.phone}
+              </a>
+            </div>
           </Reveal>
 
           <Reveal delay={0.05}>

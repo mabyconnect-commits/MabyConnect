@@ -54,7 +54,7 @@ export default function AboutPage() {
         </div>
 
         <Reveal delay={0.15} className="lg:sticky lg:top-28 lg:h-fit">
-          <Portrait className="aspect-[3/4] w-full" />
+          <Portrait src="/portrait-about.jpg" className="aspect-[3/4] w-full" />
         </Reveal>
       </section>
 

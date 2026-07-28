@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { site } from "@/lib/site";
+import { site, socials } from "@/lib/site";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.person} — ${site.name}`,
     description: site.description,
-    creator: "@mabyconnect",
+    creator: "@OxMaby",
   },
   robots: {
     index: true,
@@ -84,6 +84,8 @@ export default function RootLayout({
     email: `mailto:${site.email}`,
     jobTitle: "Founder & Builder",
     description: site.description,
+    telephone: site.phoneHref.replace("tel:", ""),
+    sameAs: socials.map((s) => s.href),
     knowsAbout: [
       "Crypto",
       "Web3",
