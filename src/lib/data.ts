@@ -8,7 +8,7 @@ export type Company = {
   tagline: string;
   category: string;
   year: string;
-  status: "Live" | "Building" | "Scaling";
+  status: "Live" | "Building" | "Scaling" | "Coming Soon";
   summary: string;
   description: string[];
   highlights: string[];
@@ -110,6 +110,28 @@ export const companies: Company[] = [
     url: "https://whygroceries.com",
   },
   {
+    slug: "maby-academy",
+    name: "Maby Academy",
+    tagline: "Learn to build. Learn to grow.",
+    category: "Education",
+    year: "2025 →",
+    status: "Coming Soon",
+    summary:
+      "The learning arm of Maby Connect — a place to gain the skills behind everything built here. More details soon.",
+    description: [
+      "Maby Academy is the education sub-brand of Maby Connect: being built as a place to learn the skills behind everything under this roof — building, crypto, business and personal growth.",
+      "The full experience and curriculum are on the way. This page will grow into the home of Maby Academy as it takes shape.",
+      "Want to be first in line when it opens? Reach out and I'll keep you posted.",
+    ],
+    highlights: [
+      "Skills to build & earn",
+      "Crypto & web3",
+      "Business & strategy",
+      "Faith & personal growth",
+    ],
+    accent: true,
+  },
+  {
     slug: "future-ventures",
     name: "Future Ventures",
     tagline: "The next companies, already in motion.",
@@ -135,6 +157,13 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    title: "Maby Academy",
+    domain: "Education",
+    year: "2025",
+    blurb:
+      "The learning arm of Maby Connect — teaching the skills behind everything built here. In development; more soon.",
+  },
   {
     title: "Memecoin Research Desk",
     domain: "Crypto",
