@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "@/components/ui/Logo";
 
 /**
  * Premium first-load screen. Shows once per browser session.
@@ -56,11 +57,20 @@ export default function LoadingScreen() {
           exit={{ y: "-100%" }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
         >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-8"
+          >
+            <Logo className="h-16 w-16 md:h-20 md:w-20" />
+          </motion.div>
+
           <div className="overflow-hidden">
             <motion.div
               initial={{ y: "110%" }}
               animate={{ y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
               className="flex items-baseline gap-3"
             >
               <span className="display text-[clamp(2.5rem,9vw,6rem)] text-white">

@@ -17,6 +17,17 @@ export default async function OpengraphImage() {
     portrait = "";
   }
 
+  // Brand mark.
+  let mark = "";
+  try {
+    const data = await readFile(
+      join(process.cwd(), "public", "logo", "maby-icon-1024-transparent.png"),
+    );
+    mark = `data:image/png;base64,${data.toString("base64")}`;
+  } catch {
+    mark = "";
+  }
+
   return new ImageResponse(
     (
       <div
@@ -64,7 +75,11 @@ export default async function OpengraphImage() {
               fontFamily: "monospace",
             }}
           >
-            <div style={{ width: 12, height: 12, borderRadius: 12, background: "#d6b35a" }} />
+            {mark ? (
+              <img src={mark} width={34} height={34} alt="" />
+            ) : (
+              <div style={{ width: 12, height: 12, borderRadius: 12, background: "#d6b35a" }} />
+            )}
             MABY CONNECT
           </div>
 

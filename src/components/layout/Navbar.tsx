@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { nav, socials, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import Logo from "@/components/ui/Logo";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -43,13 +44,15 @@ export default function Navbar() {
         >
           <Link
             href="/"
-            className="group relative z-[95] flex items-center gap-2"
+            className="group relative z-[95] flex items-center gap-2.5"
             aria-label="Maby Connect — home"
           >
-            <span className="display text-lg tracking-tight text-white">Maby</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-gold transition-transform duration-500 group-hover:scale-150" />
-            <span className="display text-lg tracking-tight text-white/60 transition-colors group-hover:text-white">
-              Connect
+            <Logo className="h-7 w-7 transition-transform duration-500 group-hover:rotate-[-8deg]" />
+            <span className="flex items-baseline gap-1.5">
+              <span className="display text-lg tracking-tight text-white">Maby</span>
+              <span className="display text-lg tracking-tight text-white/55 transition-colors group-hover:text-white">
+                Connect
+              </span>
             </span>
           </Link>
 
