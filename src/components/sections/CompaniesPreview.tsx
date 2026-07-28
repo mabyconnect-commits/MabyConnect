@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import ArrowLink from "@/components/ui/ArrowLink";
+import CompanyLogo from "@/components/ui/CompanyLogo";
 import { companies } from "@/lib/data";
 
 /**
@@ -75,6 +76,12 @@ export default function CompaniesPreview() {
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="glass w-full rounded-2xl p-6"
                 >
+                  <CompanyLogo
+                    name={companies[active].name}
+                    logo={companies[active].logo}
+                    size={48}
+                    className="mb-5"
+                  />
                   <div className="flex items-center justify-between">
                     <span className="rounded-full bg-gold-soft px-3 py-1 font-mono text-[10px] tracking-widest text-gold uppercase">
                       {companies[active].status}

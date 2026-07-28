@@ -15,6 +15,8 @@ export type Company = {
   accent?: boolean;
   url?: string;
   role?: string;
+  /** Brand logo tile in /public/logos (square). */
+  logo?: string;
 };
 
 export const companies: Company[] = [
@@ -40,6 +42,7 @@ export const companies: Company[] = [
       "Accessible to every class",
     ],
     url: "https://channels.realty",
+    logo: "/logos/channels-realty.png",
     accent: true,
   },
   {
@@ -63,6 +66,7 @@ export const companies: Company[] = [
       "Reputation & trust built in",
     ],
     url: "https://surlink.org",
+    logo: "/logos/surlink.png",
   },
   {
     slug: "ttip",
@@ -85,6 +89,7 @@ export const companies: Company[] = [
       "Borderless transfers",
     ],
     url: "https://ttip.site",
+    logo: "/logos/ttip.png",
     accent: true,
   },
   {
@@ -108,6 +113,7 @@ export const companies: Company[] = [
       "Tailored to your needs",
     ],
     url: "https://whygroceries.com",
+    logo: "/logos/groceries.png",
   },
   {
     slug: "maby-academy",

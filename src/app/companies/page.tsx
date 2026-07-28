@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
+import CompanyLogo from "@/components/ui/CompanyLogo";
 import { companies } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -27,11 +28,18 @@ export default function CompaniesPage() {
             <Reveal key={c.slug}>
               <Link
                 href={`/companies/${c.slug}`}
-                className="group grid grid-cols-1 gap-6 border-b border-line py-10 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-10 md:py-14"
+                className="group grid grid-cols-1 gap-6 border-b border-line py-10 md:grid-cols-[auto_auto_1fr_auto] md:items-center md:gap-10 md:py-14"
               >
                 <span className="font-mono text-xs text-faint">
                   0{i + 1}
                 </span>
+
+                <CompanyLogo
+                  name={c.name}
+                  logo={c.logo}
+                  size={64}
+                  className="transition-transform duration-300 group-hover:scale-105"
+                />
 
                 <div>
                   <div className="flex flex-wrap items-center gap-3">
