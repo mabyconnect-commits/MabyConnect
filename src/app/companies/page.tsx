@@ -48,6 +48,11 @@ export default function CompaniesPage() {
                   <div className="mt-5 flex flex-wrap gap-x-6 gap-y-1 font-mono text-xs text-faint">
                     <span>{c.category}</span>
                     <span>Est. {c.year}</span>
+                    {c.url && (
+                      <span className="text-gold">
+                        {c.url.replace(/^https?:\/\//, "")}
+                      </span>
+                    )}
                   </div>
                 </div>
 

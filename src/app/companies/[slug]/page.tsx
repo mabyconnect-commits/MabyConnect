@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
 import AnimatedText from "@/components/ui/AnimatedText";
 import MagneticButton from "@/components/ui/MagneticButton";
+import ArrowLink from "@/components/ui/ArrowLink";
 import { companies } from "@/lib/data";
 
 export function generateStaticParams() {
@@ -67,6 +68,14 @@ export default async function CompanyPage({
             {company.tagline}
           </p>
         </Reveal>
+
+        {company.url && (
+          <Reveal delay={0.3} className="mt-6">
+            <ArrowLink href={company.url} external>
+              {company.url.replace(/^https?:\/\//, "")}
+            </ArrowLink>
+          </Reveal>
+        )}
       </header>
 
       {/* Visual band */}
@@ -104,7 +113,12 @@ export default async function CompanyPage({
               </li>
             ))}
           </ul>
-          <div className="mt-10">
+          <div className="mt-10 flex flex-wrap gap-3">
+            {company.url && (
+              <MagneticButton href={company.url} variant="solid" cursorLabel="Visit">
+                Visit website
+              </MagneticButton>
+            )}
             <MagneticButton href="/contact" variant="outline">
               Work with us
             </MagneticButton>
