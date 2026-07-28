@@ -148,12 +148,15 @@ export const projects: Project[] = [
   },
 ];
 
+export type Platform = "WhatsApp" | "Telegram";
+
 export type Community = {
   name: string;
   purpose: string;
   description: string;
-  channel: "Telegram" | "WhatsApp" | "Discord";
+  channel: Platform;
   cta: string;
+  href: string;
 };
 
 export const communities: Community[] = [
@@ -162,8 +165,9 @@ export const communities: Community[] = [
     purpose: "Grow in every area of life.",
     description:
       "Faith. Finance. Business. Health. Relationships. A community built to help you become whole — not just successful.",
-    channel: "Telegram",
+    channel: "WhatsApp",
     cta: "Join AllRound Growth",
+    href: "https://chat.whatsapp.com/CsYAZTqWGUw1yFV55VrdaT",
   },
   {
     name: "The Praying Community",
@@ -172,10 +176,38 @@ export const communities: Community[] = [
       "A gathering of believers who pray, encourage and grow in faith together. Everything begins here.",
     channel: "WhatsApp",
     cta: "Join The Praying Community",
+    href: "https://chat.whatsapp.com/DDVkFK6m5rl85garNxoXIq",
   },
 ];
 
-export const communityChannels = ["Telegram", "WhatsApp", "Discord"] as const;
+export type Channel = {
+  name: string;
+  platform: Platform;
+  description: string;
+  href: string;
+};
+
+/** Every other room to join — updates and crypto. */
+export const channels: Channel[] = [
+  {
+    name: "Online Updates With Maby",
+    platform: "WhatsApp",
+    description: "Stay in the loop on everything I'm building — announcements, drops and news.",
+    href: "https://chat.whatsapp.com/IPKh96qS1H73OJ9z5S5DjU",
+  },
+  {
+    name: "Maby D'Speculator",
+    platform: "Telegram",
+    description: "My crypto degen channel — memecoin research, calls and on-chain signal.",
+    href: "https://t.me/MabyDSpeculator",
+  },
+  {
+    name: "Maby Lounge",
+    platform: "Telegram",
+    description: "The crypto lounge — a room to trade, talk markets and learn together.",
+    href: "https://t.me/+IMPPY91eYAk1NTdk",
+  },
+];
 
 export type TimelineItem = {
   year: string;

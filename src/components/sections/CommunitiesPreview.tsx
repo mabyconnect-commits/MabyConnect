@@ -51,7 +51,9 @@ export default function CommunitiesPreview() {
                 </p>
               </div>
               <div className="mt-10">
-                <ArrowLink href="/communities">{c.cta}</ArrowLink>
+                <ArrowLink href={c.href} external>
+                  {c.cta}
+                </ArrowLink>
               </div>
             </Reveal>
           ))}

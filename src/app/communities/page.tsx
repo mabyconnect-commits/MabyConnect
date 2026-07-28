@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import { Send, MessageCircle, Hash } from "lucide-react";
+import { Send, MessageCircle } from "lucide-react";
 import PageHeader from "@/components/ui/PageHeader";
 import Reveal from "@/components/ui/Reveal";
 import MagneticButton from "@/components/ui/MagneticButton";
-import { communities } from "@/lib/data";
+import { communities, channels } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Communities",
   description:
-    "Join the Maby Connect communities — AllRound Growth and The Praying Community — on Telegram, WhatsApp and Discord.",
+    "Join the Maby Connect communities — AllRound Growth, The Praying Community, online updates and the crypto rooms — on WhatsApp and Telegram.",
 };
 
 const channelIcon = {
   Telegram: Send,
   WhatsApp: MessageCircle,
-  Discord: Hash,
 } as const;
 
 export default function CommunitiesPage() {
@@ -56,7 +55,7 @@ export default function CommunitiesPage() {
                   </p>
                 </div>
                 <div className="mt-12">
-                  <MagneticButton href="/contact" variant="solid">
+                  <MagneticButton href={c.href} variant="solid" cursorLabel="Join">
                     {c.cta}
                   </MagneticButton>
                 </div>
@@ -66,30 +65,47 @@ export default function CommunitiesPage() {
         </div>
       </section>
 
-      {/* Channels */}
+      {/* More rooms — updates & crypto */}
       <section className="border-t border-line py-24">
         <div className="container-x">
           <Reveal>
             <h2 className="display max-w-3xl text-[clamp(1.8rem,5vw,3.4rem)] text-white text-balance">
-              Wherever you are, there&apos;s a room for you.
+              More rooms. Updates, markets and everything Maby.
             </h2>
           </Reveal>
-          <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-line sm:grid-cols-3">
-            {(["Telegram", "WhatsApp", "Discord"] as const).map((ch, i) => {
-              const Icon = channelIcon[ch];
+
+          <div className="mt-12 overflow-hidden rounded-3xl border border-line">
+            {channels.map((ch, i) => {
+              const Icon = channelIcon[ch.platform];
               return (
-                <Reveal
-                  key={ch}
-                  delay={i * 0.08}
-                  className="group flex items-center justify-between bg-surface/40 p-8 transition-colors duration-500 hover:bg-surface"
-                >
-                  <div className="flex items-center gap-4">
-                    <Icon className="h-5 w-5 text-gold" />
-                    <span className="text-lg text-white">{ch}</span>
-                  </div>
-                  <span className="font-mono text-xs text-faint transition-colors group-hover:text-gold">
-                    Join →
-                  </span>
+                <Reveal key={ch.name} delay={i * 0.06}>
+                  <a
+                    href={ch.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-cursor-label="Join"
+                    className="group grid grid-cols-[auto_1fr_auto] items-center gap-5 border-b border-line bg-surface/40 p-6 transition-colors duration-500 last:border-b-0 hover:bg-surface md:gap-8 md:p-8"
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-line transition-colors group-hover:border-gold/40">
+                      <Icon className="h-4 w-4 text-gold" />
+                    </span>
+                    <div>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <h3 className="text-xl text-white/90 transition-colors group-hover:text-white md:text-2xl">
+                          {ch.name}
+                        </h3>
+                        <span className="font-mono text-[10px] tracking-widest text-faint uppercase">
+                          {ch.platform}
+                        </span>
+                      </div>
+                      <p className="mt-1.5 max-w-xl text-sm leading-relaxed text-mist">
+                        {ch.description}
+                      </p>
+                    </div>
+                    <span className="font-mono text-xs text-faint transition-colors group-hover:text-gold">
+                      Join&nbsp;→
+                    </span>
+                  </a>
                 </Reveal>
               );
             })}
