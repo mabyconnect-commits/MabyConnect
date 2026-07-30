@@ -65,7 +65,7 @@ export const companies: Company[] = [
       "Choose your quality standard",
       "Reputation & trust built in",
     ],
-    url: "https://surlink.org",
+    url: "https://surlink.online",
     logo: "/logos/surlink.png",
   },
   {
@@ -112,7 +112,7 @@ export const companies: Company[] = [
       "Raw & ready-made dishes",
       "Tailored to your needs",
     ],
-    url: "https://whygroceries.com",
+    url: "https://whygroceries.store",
     logo: "/logos/groceries.png",
   },
   {
@@ -135,6 +135,9 @@ export const companies: Company[] = [
       "Business & strategy",
       "Faith & personal growth",
     ],
+    url: "https://mabyacademy.site",
+    // The Academy carries the Maby Connect mark as its own logo.
+    logo: "/logo/maby-icon-transparent.svg",
     accent: true,
   },
   {
