@@ -36,6 +36,9 @@ export default function Navbar() {
         className={cn(
           "fixed inset-x-0 top-0 z-[80] transition-all duration-500",
           scrolled || open ? "py-3" : "py-5",
+          // Once the page scrolls, back the bar so content passing underneath
+          // never collides with the wordmark.
+          scrolled && !open && "border-b border-line bg-ink/80 backdrop-blur-xl",
         )}
       >
         <div

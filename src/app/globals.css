@@ -152,7 +152,15 @@
 
   .text-outline {
     color: transparent;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.28);
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.42);
+  }
+
+  /* Without text-stroke support the transparent fill would leave the text
+     invisible, so fall back to a solid muted fill. */
+  @supports not (-webkit-text-stroke: 1px #fff) {
+    .text-outline {
+      color: rgba(255, 255, 255, 0.38);
+    }
   }
 }
 
