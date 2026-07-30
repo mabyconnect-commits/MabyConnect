@@ -121,13 +121,13 @@ export const companies: Company[] = [
     tagline: "Learn to build. Learn to grow.",
     category: "Education",
     year: "2025 →",
-    status: "Coming Soon",
+    status: "Building",
     summary:
-      "The learning arm of Maby Connect — a place to gain the skills behind everything built here. More details soon.",
+      "The learning arm of Maby Connect — a place to gain the skills behind everything built here. Live and growing.",
     description: [
-      "Maby Academy is the education sub-brand of Maby Connect: being built as a place to learn the skills behind everything under this roof — building, crypto, business and personal growth.",
-      "The full experience and curriculum are on the way. This page will grow into the home of Maby Academy as it takes shape.",
-      "Want to be first in line when it opens? Reach out and I'll keep you posted.",
+      "Maby Academy is the education sub-brand of Maby Connect: a place to learn the skills behind everything under this roof — building, crypto, business and personal growth.",
+      "The Academy is live and the curriculum is still being built out — new courses and programmes are being added as it takes shape.",
+      "Come and see what's already there, or reach out and I'll keep you posted as it grows.",
     ],
     highlights: [
       "Skills to build & earn",
@@ -171,7 +171,7 @@ export const projects: Project[] = [
     domain: "Education",
     year: "2025",
     blurb:
-      "The learning arm of Maby Connect — teaching the skills behind everything built here. In development; more soon.",
+      "The learning arm of Maby Connect — teaching the skills behind everything built here. Live and still growing.",
   },
   {
     title: "Memecoin Research Desk",
