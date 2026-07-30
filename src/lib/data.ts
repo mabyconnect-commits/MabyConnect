@@ -41,7 +41,7 @@ export const companies: Company[] = [
       "Start from as low as ₦20,000",
       "Accessible to every class",
     ],
-    url: "https://channels.realty",
+    url: "https://channelsrealty.online",
     logo: "/logos/channels-realty.png",
     accent: true,
   },
