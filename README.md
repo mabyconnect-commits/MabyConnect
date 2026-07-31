@@ -75,12 +75,60 @@ The component probes for it on load and swaps it in automatically — no code
 change required. A tall (3:4 / 4:5), high-contrast, minimally-edited photo works
 best. To use a different filename, pass `src` to `<Portrait src="/your-file.jpg" />`.
 
-## Wiring the contact form
+## Maby Agency
 
-The contact form uses a **Server Action** at `src/app/contact/actions.ts`.
-It currently validates input and logs the enquiry on the server. To make it
-live, integrate an email/CRM provider (e.g. Resend, Postmark, or a webhook) at
-the `TODO` marker inside `submitContact`.
+The build arm of Maby Connect lives at `/agency`:
+
+| Route | What it is |
+| --- | --- |
+| `/agency` | Landing page — capabilities, stack, process, engagements, proof, FAQ |
+| `/agency/capabilities/[slug]` | Deep spec per discipline (8 of them) |
+| `/agency/start` | Project configurator — a survey that produces a scope, timeline and budget band |
+| `/agency/book` | Appointment booking with a working calendar |
+| `/agency/portal` | Client portal — milestones, deliverables, invoices, activity |
+
+Content lives in `src/lib/agency.ts`; portal workspaces in `src/lib/portal.ts`.
+
+## Email delivery
+
+The contact form, project briefs and bookings all send through
+`src/lib/email.ts`, which posts to Resend's REST API (no SDK to install).
+Each submission emails the agency inbox — with `reply-to` set to the enquirer,
+so hitting reply just works — and sends a confirmation to the person who
+submitted.
+
+Set these to switch it on:
+
+```
+RESEND_API_KEY=…
+AGENCY_FROM_EMAIL="Maby Agency <build@mabyconnect.com>"   # verified sender
+AGENCY_NOTIFY_EMAIL=build@mabyconnect.com                 # where enquiries land
+```
+
+Without them the site still accepts submissions — it logs them server-side
+instead of emailing, so nothing breaks in development or preview deploys.
+Delivery is best-effort by design: a provider outage can never reject an
+enquiry the user already completed.
+
+## Client portal access
+
+Access codes are verified **on the server** and exchanged for an HMAC-signed,
+`httpOnly` session cookie (7 days). No code or workspace data reaches the
+browser until sign-in succeeds, so a wrong code reveals nothing.
+
+```
+PORTAL_SESSION_SECRET=…            # openssl rand -base64 32
+PORTAL_CLIENTS='[{"code":"NW-4821","workspace":"northwind","label":"Northwind Labs"}]'
+PORTAL_DISABLE_DEMO=1              # optional — hides the public demo login
+```
+
+`workspace` must match a key in the `workspaces` registry in
+`src/lib/portal.ts`. A public demo login (`MABY-DEMO`) is enabled by default so
+prospects can tour the portal; it opens a clearly-labelled sample workspace.
+
+When the client list outgrows an environment variable, swap `clients()` and
+`verifyCode()` in `src/lib/portal-auth.ts` for database lookups — the session
+handling and every component stay as they are.
 
 ## Deploying to Vercel
 
@@ -91,9 +139,11 @@ The project is a standard Next.js app and deploys with zero configuration:
 2. Optional but recommended: set `NEXT_PUBLIC_SITE_URL` to your final domain so
    canonical/Open Graph/sitemap URLs are correct. In production Vercel otherwise
    derives it from `VERCEL_PROJECT_PRODUCTION_URL` automatically.
-3. Deploy. That's it — no database or other services are required.
+3. Deploy. That's it — no database is required.
+4. To turn on email and the client portal, add the variables from the two
+   sections above under **Settings → Environment Variables**.
 
-See `.env.example` for the (single, optional) environment variable.
+See `.env.example` for every variable, all of them optional.
 
 ## Editing content
 

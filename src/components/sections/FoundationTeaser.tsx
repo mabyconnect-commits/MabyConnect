@@ -29,7 +29,7 @@ export default function FoundationTeaser() {
 
       <div className="container-x text-center">
         <Reveal className="mx-auto flex w-fit items-center gap-4">
-          <span className="font-mono text-xs text-gold">003</span>
+          <span className="font-mono text-xs text-gold">004</span>
           <span className="h-px w-10 bg-line-strong" />
           <span className="eyebrow">Jenmec Foundation</span>
         </Reveal>

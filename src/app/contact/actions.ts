@@ -1,5 +1,8 @@
 "use server";
 
+import { agencyInbox, sendAll } from "@/lib/email";
+import { site } from "@/lib/site";
+
 export type ContactState = {
   status: "idle" | "success" | "error";
   message: string;
@@ -8,9 +11,9 @@ export type ContactState = {
 /**
  * Server Action for the contact form.
  *
- * This validates input and (for now) logs the enquiry on the server.
- * To make it live, wire an email/CRM provider where indicated below
- * (e.g. Resend, Postmark, or a Notion/Sheets webhook).
+ * Validates the enquiry, then emails it on — a notification to the inbox
+ * (reply-to the sender) and a confirmation back to them. Delivery is
+ * best-effort; see src/lib/email.ts for the environment variables needed.
  */
 export async function submitContact(
   _prev: ContactState,
@@ -36,12 +39,37 @@ export async function submitContact(
   }
 
   try {
-    // TODO: integrate a real delivery mechanism here.
-    // await resend.emails.send({ ... })
     console.info("[contact] new enquiry", { name, email, topic, length: message.length });
 
-    // Small delay so the UI transition feels intentional.
-    await new Promise((r) => setTimeout(r, 600));
+    await sendAll([
+      {
+        to: agencyInbox(),
+        replyTo: email,
+        subject: `New enquiry — ${name}${topic ? ` · ${topic}` : ""}`,
+        text: [
+          `Name: ${name}`,
+          `Email: ${email}`,
+          topic ? `Topic: ${topic}` : "",
+          "",
+          message,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+      },
+      {
+        to: email,
+        replyTo: agencyInbox(),
+        subject: "Thanks for reaching out — Maby Connect",
+        text: [
+          `Hi ${name.split(" ")[0]},`,
+          "",
+          "Thanks for getting in touch. Your message has landed and I'll come back to you personally, usually within 24 hours.",
+          "",
+          "— Matthew Adeleye",
+          site.name,
+        ].join("\n"),
+      },
+    ]);
 
     return {
       status: "success",

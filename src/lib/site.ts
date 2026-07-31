@@ -30,12 +30,28 @@ export const nav = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Companies", href: "/companies" },
+  { label: "Agency", href: "/agency" },
   { label: "Projects", href: "/projects" },
   { label: "Communities", href: "/communities" },
   { label: "Foundation", href: "/foundation" },
   { label: "Media", href: "/media" },
   { label: "Articles", href: "/articles" },
   { label: "Contact", href: "/contact" },
+] as const;
+
+/**
+ * The desktop nav pill only has room for a handful of links, so it gets a
+ * curated subset. Everything in `nav` still appears in the mobile overlay,
+ * the footer and the sitemap.
+ */
+export const primaryNav = [
+  { label: "About", href: "/about" },
+  { label: "Companies", href: "/companies" },
+  { label: "Agency", href: "/agency" },
+  { label: "Projects", href: "/projects" },
+  { label: "Communities", href: "/communities" },
+  { label: "Foundation", href: "/foundation" },
+  { label: "Articles", href: "/articles" },
 ] as const;
 
 export const socials = [

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { nav, socials, site } from "@/lib/site";
+import { nav, primaryNav, socials, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/ui/Logo";
 import Wordmark from "@/components/ui/Wordmark";
@@ -63,7 +63,7 @@ export default function Navbar() {
                 scrolled ? "glass border-line" : "border-transparent",
               )}
             >
-              {nav.slice(1, 8).map((item) => {
+              {primaryNav.map((item) => {
                 const active = pathname === item.href;
                 return (
                   <Link
@@ -162,7 +162,7 @@ export default function Navbar() {
                         {item.label}
                       </span>
                       <span className="font-mono text-xs text-faint">
-                        0{i + 1}
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                     </Link>
                   </motion.div>
