@@ -42,7 +42,8 @@ export const socials = [
   { label: "X / Twitter", handle: "@OxMaby", href: "https://x.com/OxMaby" },
   { label: "Instagram", handle: "@mabyconnect247", href: "https://www.instagram.com/mabyconnect247" },
   { label: "TikTok", handle: "@mabyconnect01", href: "https://www.tiktok.com/@mabyconnect01" },
-  { label: "Facebook", handle: "Maby Connect", href: "https://www.facebook.com/share/1gJxYuUTNP/" },
+  { label: "Facebook", handle: "Maby Connect", href: "https://www.facebook.com/share/18m1ioLEyR/" },
   { label: "LinkedIn", handle: "Maby Connect", href: "https://www.linkedin.com/in/maby-connect-aa074a276" },
+  { label: "WhatsApp", handle: "0913 621 4038", href: "https://wa.me/2349136214038" },
   { label: "Telegram", handle: "@Mabyconnect2000", href: "https://t.me/Mabyconnect2000" },
 ] as const;
