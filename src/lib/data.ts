@@ -262,6 +262,15 @@ export type Community = {
 
 export const communities: Community[] = [
   {
+    name: "Maby Connect",
+    purpose: "The home base for everything Maby.",
+    description:
+      "The main Telegram community — where the whole movement lives. Announcements, conversations and everyone building under Maby Connect, all in one room.",
+    channel: "Telegram",
+    cta: "Join Maby Connect",
+    href: "https://t.me/Mabyconnect2022",
+  },
+  {
     name: "AllRound Growth",
     purpose: "Grow in every area of life.",
     description:
