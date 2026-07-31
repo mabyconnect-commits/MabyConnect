@@ -89,6 +89,24 @@ export default function Footer() {
               </li>
             ))}
           </ul>
+
+          <p className="eyebrow mt-8 mb-5">Agency</p>
+          <ul className="space-y-2.5">
+            {[
+              { label: "Start a project", href: "/agency/start" },
+              { label: "Book a call", href: "/agency/book" },
+              { label: "Client portal", href: "/agency/portal" },
+            ].map((n) => (
+              <li key={n.href}>
+                <Link
+                  href={n.href}
+                  className="text-sm text-white/60 transition-colors hover:text-white"
+                >
+                  {n.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div>
