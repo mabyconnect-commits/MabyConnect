@@ -4,18 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  ArrowRight,
   CalendarClock,
   Check,
   CircleDashed,
   Download,
   ExternalLink,
-  KeyRound,
-  Loader2,
-  LockKeyhole,
 } from "lucide-react";
-import Logo from "@/components/ui/Logo";
-import { DEMO_ACCESS_CODE, demoWorkspace, type Invoice } from "@/lib/portal";
+import { signOut } from "@/app/agency/portal/auth-actions";
+import type { Workspace } from "@/lib/portal";
 import { cn } from "@/lib/utils";
 
 type Tab = "overview" | "deliverables" | "billing" | "activity";
@@ -27,134 +23,9 @@ const tabs: { id: Tab; label: string }[] = [
   { id: "activity", label: "Activity" },
 ];
 
-/* ------------------------------------------------------------
-   Sign in
-   ------------------------------------------------------------ */
-
-function SignIn({ onUnlock }: { onUnlock: () => void }) {
-  const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [error, setError] = useState("");
-  const [checking, setChecking] = useState(false);
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setChecking(true);
-
-    // Demo gate. Replace with a real auth provider (Auth.js, Clerk,
-    // Supabase) when client accounts are issued — the dashboard below
-    // reads from `demoWorkspace` and needs no other change.
-    setTimeout(() => {
-      if (code.trim().toUpperCase() === DEMO_ACCESS_CODE) {
-        onUnlock();
-      } else {
-        setError("That code isn't recognised. Try the demo code below.");
-        setChecking(false);
-      }
-    }, 600);
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="mx-auto w-full max-w-md"
-    >
-      <div className="rounded-3xl border border-line bg-surface/40 p-8 md:p-10">
-        <div className="flex items-center gap-3">
-          <Logo className="h-8 w-8" />
-          <div>
-            <p className="display text-lg text-white">Client Portal</p>
-            <p className="font-mono text-[10px] tracking-widest text-faint uppercase">
-              Maby Agency
-            </p>
-          </div>
-        </div>
-
-        <h1 className="display mt-10 text-3xl text-white">Sign in.</h1>
-        <p className="mt-3 text-sm leading-relaxed text-mist">
-          Track your build, download deliverables and see exactly where your
-          money went.
-        </p>
-
-        <form onSubmit={submit} className="mt-8 space-y-3">
-          <input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            type="email"
-            required
-            placeholder="Email address"
-            autoComplete="email"
-            className="w-full rounded-xl border border-line bg-ink px-4 py-3.5 text-sm text-white placeholder-faint outline-none transition-colors focus:border-gold"
-          />
-          <div className="relative">
-            <KeyRound className="absolute top-1/2 left-4 h-4 w-4 -translate-y-1/2 text-faint" />
-            <input
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              required
-              placeholder="Access code"
-              className="w-full rounded-xl border border-line bg-ink py-3.5 pr-4 pl-11 text-sm tracking-widest text-white uppercase placeholder-faint placeholder:normal-case placeholder:tracking-normal outline-none transition-colors focus:border-gold"
-            />
-          </div>
-
-          {error && <p className="text-sm text-gold">{error}</p>}
-
-          <button
-            type="submit"
-            disabled={checking}
-            className="group inline-flex w-full items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-gold disabled:opacity-60"
-          >
-            {checking ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Checking
-              </>
-            ) : (
-              <>
-                Enter portal
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </>
-            )}
-          </button>
-        </form>
-
-        <div className="mt-8 rounded-2xl border border-gold/25 bg-gold-soft p-5">
-          <p className="font-mono text-[10px] tracking-widest text-gold uppercase">
-            Demo access
-          </p>
-          <p className="mt-2 text-sm text-white/80">
-            Use any email with the code{" "}
-            <button
-              type="button"
-              onClick={() => setCode(DEMO_ACCESS_CODE)}
-              className="font-mono text-gold underline decoration-gold/40 underline-offset-4 transition-colors hover:decoration-gold"
-            >
-              {DEMO_ACCESS_CODE}
-            </button>{" "}
-            to tour a sample project workspace.
-          </p>
-        </div>
-      </div>
-
-      <p className="mt-6 flex items-center justify-center gap-2 text-xs text-faint">
-        <LockKeyhole className="h-3 w-3" />
-        Client accounts are issued at project kickoff.
-      </p>
-    </motion.div>
-  );
-}
-
-/* ------------------------------------------------------------
-   Dashboard
-   ------------------------------------------------------------ */
-
-function Overview() {
-  const w = demoWorkspace;
+function Overview({ w }: { w: Workspace }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-      {/* Milestones */}
       <div className="rounded-3xl border border-line bg-surface/40 p-8">
         <p className="eyebrow mb-8">Milestones</p>
         <ol className="relative space-y-7 border-l border-line pl-8">
@@ -198,7 +69,6 @@ function Overview() {
         </ol>
       </div>
 
-      {/* Side cards */}
       <div className="space-y-6">
         <div className="rounded-3xl border border-line bg-surface/40 p-8">
           <p className="eyebrow mb-6">Progress</p>
@@ -260,10 +130,10 @@ function Overview() {
   );
 }
 
-function Deliverables() {
+function Deliverables({ w }: { w: Workspace }) {
   return (
     <div className="overflow-hidden rounded-3xl border border-line">
-      {demoWorkspace.deliverables.map((d) => (
+      {w.deliverables.map((d) => (
         <div
           key={d.name}
           className="group flex items-center justify-between gap-6 border-b border-line px-6 py-5 transition-colors last:border-b-0 hover:bg-surface"
@@ -283,14 +153,10 @@ function Deliverables() {
   );
 }
 
-function Billing() {
-  // Widen the fixture's literal types so every status branch stays reachable
-  // once real invoices replace the demo data.
-  const invoices: Invoice[] = [...demoWorkspace.invoices];
-
+function Billing({ w }: { w: Workspace }) {
   return (
     <div className="overflow-hidden rounded-3xl border border-line">
-      {invoices.map((inv) => (
+      {w.invoices.map((inv) => (
         <div
           key={inv.ref}
           className="flex items-center justify-between gap-6 border-b border-line px-6 py-5 last:border-b-0"
@@ -320,11 +186,11 @@ function Billing() {
   );
 }
 
-function ActivityFeed() {
+function ActivityFeed({ w }: { w: Workspace }) {
   return (
     <div className="rounded-3xl border border-line bg-surface/40 p-8">
       <ol className="space-y-6">
-        {demoWorkspace.activity.map((a, i) => (
+        {w.activity.map((a, i) => (
           <li key={i} className="flex gap-5">
             <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
             <div>
@@ -342,15 +208,8 @@ function ActivityFeed() {
   );
 }
 
-/* ------------------------------------------------------------
-   Shell
-   ------------------------------------------------------------ */
-
-export default function PortalShell() {
-  const [authed, setAuthed] = useState(false);
+export default function PortalDashboard({ workspace }: { workspace: Workspace }) {
   const [tab, setTab] = useState<Tab>("overview");
-
-  if (!authed) return <SignIn onUnlock={() => setAuthed(true)} />;
 
   return (
     <motion.div
@@ -358,32 +217,33 @@ export default function PortalShell() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      {/* Workspace header */}
-      <div className="flex flex-wrap items-end justify-between gap-6 border-b border-line pb-8">
+      <div className="flex flex-wrap items-start justify-between gap-6 border-b border-line pb-8">
         <div>
-          <div className="flex items-center gap-3">
-            <span className="rounded-full border border-gold/30 bg-gold-soft px-3 py-1 font-mono text-[10px] tracking-widest text-gold uppercase">
-              Demo workspace
-            </span>
+          <div className="flex flex-wrap items-center gap-3">
+            {workspace.demo && (
+              <span className="rounded-full border border-gold/30 bg-gold-soft px-3 py-1 font-mono text-[10px] tracking-widest text-gold uppercase">
+                Demo workspace
+              </span>
+            )}
             <span className="font-mono text-[10px] tracking-widest text-faint uppercase">
-              {demoWorkspace.client}
+              {workspace.client}
             </span>
           </div>
           <h1 className="display mt-5 text-[clamp(1.8rem,5vw,3.5rem)] leading-tight text-white">
-            {demoWorkspace.project}
+            {workspace.project}
           </h1>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setAuthed(false)}
-          className="text-sm text-faint transition-colors hover:text-white"
-        >
-          Sign out
-        </button>
+        <form action={signOut}>
+          <button
+            type="submit"
+            className="text-sm text-faint transition-colors hover:text-white"
+          >
+            Sign out
+          </button>
+        </form>
       </div>
 
-      {/* Tabs */}
       <div className="mt-8 flex flex-wrap gap-1">
         {tabs.map((t) => (
           <button
@@ -416,21 +276,23 @@ export default function PortalShell() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           >
-            {tab === "overview" && <Overview />}
-            {tab === "deliverables" && <Deliverables />}
-            {tab === "billing" && <Billing />}
-            {tab === "activity" && <ActivityFeed />}
+            {tab === "overview" && <Overview w={workspace} />}
+            {tab === "deliverables" && <Deliverables w={workspace} />}
+            {tab === "billing" && <Billing w={workspace} />}
+            {tab === "activity" && <ActivityFeed w={workspace} />}
           </motion.div>
         </AnimatePresence>
       </div>
 
-      <p className="mt-14 border-t border-line pt-8 text-sm text-faint">
-        This is a sample workspace with placeholder data.{" "}
-        <Link href="/agency/start" className="text-white/80 hover:text-gold">
-          Start a project
-        </Link>{" "}
-        and you&apos;ll get a real one at kickoff.
-      </p>
+      {workspace.demo && (
+        <p className="mt-14 border-t border-line pt-8 text-sm text-faint">
+          This is a sample workspace with placeholder data.{" "}
+          <Link href="/agency/start" className="text-white/80 hover:text-gold">
+            Start a project
+          </Link>{" "}
+          and you&apos;ll get a real one at kickoff.
+        </p>
+      )}
     </motion.div>
   );
 }

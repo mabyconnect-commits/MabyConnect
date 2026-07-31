@@ -1,14 +1,15 @@
 /* ============================================================
-   Client portal — demo workspace data.
+   Client portal — workspace data.
 
-   The portal ships as a working front end backed by this fixture so
-   clients can see exactly what they'd get. Swapping it for real data
-   means replacing `demoWorkspace` with a fetch and `DEMO_ACCESS_CODE`
-   with a real auth provider — no component changes required.
+   Workspaces are keyed by id and resolved after a successful sign in
+   (see src/lib/portal-auth.ts). The demo workspace ships so the portal
+   can be toured; real client workspaces are added to `workspaces`, or
+   fetched from a database once there are enough of them to justify one.
    ============================================================ */
 
 /** The code shown on the sign-in screen so anyone can tour the portal. */
 export const DEMO_ACCESS_CODE = "MABY-DEMO";
+export const DEMO_WORKSPACE_ID = "demo";
 
 export type Milestone = {
   name: string;
@@ -38,7 +39,28 @@ export type Activity = {
   what: string;
 };
 
-export const demoWorkspace = {
+export type Workspace = {
+  id: string;
+  /** Marks the sample workspace so the UI can label it honestly. */
+  demo: boolean;
+  client: string;
+  project: string;
+  engagement: string;
+  started: string;
+  launch: string;
+  progress: number;
+  lead: string;
+  staging: string;
+  milestones: Milestone[];
+  deliverables: Deliverable[];
+  invoices: Invoice[];
+  activity: Activity[];
+  nextCall: { label: string; date: string; time: string };
+};
+
+const demoWorkspace: Workspace = {
+  id: DEMO_WORKSPACE_ID,
+  demo: true,
   client: "Northwind Labs",
   project: "Northwind — Payments Platform",
   engagement: "Product Build",
@@ -91,7 +113,7 @@ export const demoWorkspace = {
       date: "28 Aug",
       detail: "Threat model, load test, production deploy.",
     },
-  ] satisfies Milestone[],
+  ],
 
   deliverables: [
     { name: "System architecture", type: "PDF", size: "2.4 MB", date: "19 Jun" },
@@ -99,13 +121,13 @@ export const demoWorkspace = {
     { name: "Design system v2", type: "Figma", size: "—", date: "26 Jun" },
     { name: "API contract (OpenAPI)", type: "YAML", size: "184 KB", date: "3 Jul" },
     { name: "Sprint 4 demo recording", type: "Video", size: "88 MB", date: "24 Jul" },
-  ] satisfies Deliverable[],
+  ],
 
   invoices: [
     { ref: "INV-0412", amount: "$6,000", due: "12 Jun", status: "Paid" },
     { ref: "INV-0448", amount: "$6,000", due: "17 Jul", status: "Paid" },
     { ref: "INV-0473", amount: "$4,000", due: "21 Aug", status: "Scheduled" },
-  ] satisfies Invoice[],
+  ],
 
   activity: [
     { when: "2h ago", who: "Matthew", what: "Pushed card tokenisation to staging." },
@@ -113,11 +135,20 @@ export const demoWorkspace = {
     { when: "2 days ago", who: "Matthew", what: "Closed 7 review comments on the ledger PR." },
     { when: "4 days ago", who: "You", what: "Approved the admin dashboard designs." },
     { when: "1 week ago", who: "Samuel", what: "Completed reconciliation test suite." },
-  ] satisfies Activity[],
+  ],
 
   nextCall: {
     label: "Friday demo",
     date: "Friday, 7 August",
     time: "16:00 WAT",
   },
-} as const;
+};
+
+/** Every workspace the portal can serve, keyed by id. */
+export const workspaces: Record<string, Workspace> = {
+  [DEMO_WORKSPACE_ID]: demoWorkspace,
+};
+
+export function getWorkspace(id: string): Workspace | null {
+  return workspaces[id] ?? null;
+}

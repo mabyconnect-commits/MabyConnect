@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import PortalShell from "@/components/agency/PortalShell";
+import PortalSignIn from "@/components/agency/PortalSignIn";
+import PortalDashboard from "@/components/agency/PortalDashboard";
+import { DEMO_ACCESS_CODE, getWorkspace } from "@/lib/portal";
+import { demoEnabled, readSession, sessionCookieName } from "@/lib/portal-auth";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -17,7 +21,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PortalPage() {
+/** Session state is read per request, so this page can't be prerendered. */
+export const dynamic = "force-dynamic";
+
+export default async function PortalPage() {
+  const store = await cookies();
+  const session = readSession(store.get(sessionCookieName())?.value);
+  const workspace = session ? getWorkspace(session.workspace) : null;
+
   return (
     <div className="relative min-h-dvh">
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -33,7 +44,11 @@ export default function PortalPage() {
         </Link>
 
         <div className="mt-12">
-          <PortalShell />
+          {workspace ? (
+            <PortalDashboard workspace={workspace} />
+          ) : (
+            <PortalSignIn demoCode={demoEnabled() ? DEMO_ACCESS_CODE : undefined} />
+          )}
         </div>
       </div>
     </div>
