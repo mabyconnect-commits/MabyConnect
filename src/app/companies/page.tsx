@@ -27,7 +27,7 @@ export default function CompaniesPage() {
           {companies.map((c, i) => (
             <Reveal key={c.slug}>
               <Link
-                href={`/companies/${c.slug}`}
+                href={c.href ?? `/companies/${c.slug}`}
                 className="group grid grid-cols-1 gap-6 border-b border-line py-10 md:grid-cols-[auto_auto_1fr_auto] md:items-center md:gap-10 md:py-14"
               >
                 <span className="font-mono text-xs text-faint">

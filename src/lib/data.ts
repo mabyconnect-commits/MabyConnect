@@ -15,11 +15,43 @@ export type Company = {
   accent?: boolean;
   url?: string;
   role?: string;
+  /**
+   * Internal route this company links to instead of an external website —
+   * used for in-house arms like Maby Agency that live on their own section
+   * of this site rather than a separate domain.
+   */
+  href?: string;
   /** Brand logo tile in /public/logos (square). */
   logo?: string;
 };
 
 export const companies: Company[] = [
+  {
+    slug: "maby-agency",
+    name: "Maby Agency",
+    tagline: "We build the thing you can't stop thinking about.",
+    category: "Software · Product Studio",
+    year: "2025",
+    status: "Live",
+    role: "Founder",
+    summary:
+      "The build arm of Maby Connect — the team behind Channels Realty, Surlink, Ttip and Groceries, now taking on outside work.",
+    description: [
+      "Maby Agency is the in-house team that builds everything under Maby Connect — and now brings that same craft to outside clients.",
+      "Web platforms, blockchains from scratch, bank-grade fintech, mobile apps and AI: every engagement is scoped with a fixed price and a delivery date before anyone signs anything.",
+      "From a sentence on a napkin to something real, shipped and used — with a client portal to follow the build the whole way through.",
+    ],
+    highlights: [
+      "The team behind every Maby company",
+      "Fixed price, fixed delivery date",
+      "Web, blockchain, fintech, mobile & AI",
+      "Get a scope in 2 minutes",
+    ],
+    href: "/agency",
+    // The Agency carries the Maby Connect mark as its own logo.
+    logo: "/logo/maby-icon-transparent.svg",
+    accent: true,
+  },
   {
     slug: "channels-realty",
     name: "Channels Realty Innovation Ltd",

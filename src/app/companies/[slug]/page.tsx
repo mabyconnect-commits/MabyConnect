@@ -164,10 +164,16 @@ export default async function CompanyPage({
             ))}
           </ul>
           <div className="mt-10 flex flex-wrap gap-3">
-            {company.url && (
-              <MagneticButton href={company.url} variant="solid" cursorLabel="Visit">
-                Visit website
+            {company.href ? (
+              <MagneticButton href={company.href} variant="solid" cursorLabel="Enter">
+                Enter the agency
               </MagneticButton>
+            ) : (
+              company.url && (
+                <MagneticButton href={company.url} variant="solid" cursorLabel="Visit">
+                  Visit website
+                </MagneticButton>
+              )
             )}
             <MagneticButton href="/contact" variant="outline">
               Work with us
