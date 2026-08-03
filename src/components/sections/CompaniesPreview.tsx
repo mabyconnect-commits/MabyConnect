@@ -22,7 +22,7 @@ export default function CompaniesPreview() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <Reveal className="flex items-center gap-4">
-              <span className="font-mono text-xs text-gold">002</span>
+              <span className="font-mono text-xs text-gold">003</span>
               <span className="h-px w-10 bg-line-strong" />
               <span className="eyebrow">The Companies</span>
             </Reveal>

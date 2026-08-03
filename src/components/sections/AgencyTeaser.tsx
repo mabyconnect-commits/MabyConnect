@@ -20,7 +20,7 @@ export default function AgencyTeaser() {
 
       <div className="container-x">
         <Reveal className="flex items-center gap-4">
-          <span className="font-mono text-xs text-gold">003</span>
+          <span className="font-mono text-xs text-gold">004</span>
           <span className="h-px w-10 bg-line-strong" />
           <span className="eyebrow">Maby Agency</span>
         </Reveal>

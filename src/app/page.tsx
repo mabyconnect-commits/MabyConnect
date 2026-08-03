@@ -3,6 +3,7 @@ import Manifesto from "@/components/sections/Manifesto";
 import StatsBand from "@/components/sections/StatsBand";
 import CompaniesPreview from "@/components/sections/CompaniesPreview";
 import AgencyTeaser from "@/components/sections/AgencyTeaser";
+import StartHere from "@/components/sections/StartHere";
 import FoundationTeaser from "@/components/sections/FoundationTeaser";
 import CommunitiesPreview from "@/components/sections/CommunitiesPreview";
 import Marquee from "@/components/ui/Marquee";
@@ -19,6 +20,7 @@ export default function Home() {
 
       <Manifesto />
       <StatsBand />
+      <StartHere />
       <CompaniesPreview />
       <AgencyTeaser />
       <FoundationTeaser />
