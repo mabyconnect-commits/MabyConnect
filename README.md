@@ -89,6 +89,84 @@ The build arm of Maby Connect lives at `/agency`:
 
 Content lives in `src/lib/agency.ts`; portal workspaces in `src/lib/portal.ts`.
 
+## Maby AI
+
+An assistant that represents Maby Connect across three channels, all driven
+by one brain and one conversation engine.
+
+| Piece | Where |
+| --- | --- |
+| The brain | `src/lib/brain/` — identity is hand-written, facts are composed from `data.ts` / `agency.ts` / `site.ts` |
+| Tools | `src/lib/assistant/tools.ts` — lead capture, lookups, path recommendations |
+| Engine | `src/lib/assistant/engine.ts` — streaming + tool loop, shared by every channel |
+| Web widget | `src/components/assistant/MabyAI.tsx` → `/api/assistant` |
+| Telegram | `/api/telegram` |
+| WhatsApp | `/api/whatsapp` |
+
+**Facts live in one place.** Update a price or a link in `src/lib/data.ts` and
+the assistant knows on the next request — there is no second copy to drift.
+To change how it *thinks or sounds*, edit `src/lib/brain/identity.ts`.
+
+### Model configuration
+
+Runs on `claude-opus-5` with adaptive thinking **left on** at `low` effort.
+That combination is deliberate: disabling thinking on Opus 5 can make it emit
+tool calls as plain text — the call silently never runs — and leak `<thinking>`
+tags into replies. Low effort recovers the cost and latency without that risk.
+The system prompt is byte-stable and cached, so every request after the first
+pays cache-read rates for the whole brain.
+
+### Turning it on
+
+```
+ANTHROPIC_API_KEY=…        # console.anthropic.com/settings/keys
+```
+
+That alone lights up the web widget. Without it the widget still renders and
+says it isn't connected rather than breaking.
+
+**Telegram** (easiest — no approval needed):
+
+```
+TELEGRAM_BOT_TOKEN=…       # from @BotFather
+TELEGRAM_WEBHOOK_SECRET=…  # openssl rand -hex 32
+```
+
+Then register the webhook once:
+
+```sh
+curl -X POST "https://api.telegram.org/bot<TOKEN>/setWebhook" \
+  -d "url=https://mabyconnect.site/api/telegram" \
+  -d "secret_token=<TELEGRAM_WEBHOOK_SECRET>"
+```
+
+**WhatsApp** (slowest — Meta review required):
+
+```
+WHATSAPP_TOKEN=…
+WHATSAPP_PHONE_NUMBER_ID=…
+WHATSAPP_VERIFY_TOKEN=…    # any string; Meta echoes it during setup
+WHATSAPP_APP_SECRET=…      # verifies Meta's request signatures
+```
+
+Point Meta's webhook at `https://mabyconnect.site/api/whatsapp` and subscribe
+to the `messages` field.
+
+`GET /api/telegram` and `GET /api/whatsapp` report which variables are set, so
+you can confirm a deploy before pointing either platform at it.
+
+### Guardrails
+
+Both webhooks reject unsigned requests. The web route is rate-limited per IP.
+The assistant is scoped to Maby Connect and instructed to refuse unrelated work
+(it won't do your homework or act as a calculator), never to invent prices,
+links or statistics, and never to give financial advice — crypto volatility and
+un-guaranteed property returns are stated plainly wherever they come up.
+
+Conversation memory for Telegram and WhatsApp is in-memory per instance
+(`src/lib/assistant/sessions.ts`), so a cold start loses the thread and the
+person repeats themselves. Swap the `Map` for Redis when that matters.
+
 ## Email delivery
 
 The contact form, project briefs and bookings all send through
