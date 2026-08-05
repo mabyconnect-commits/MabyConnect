@@ -9,14 +9,45 @@ import { cn } from "@/lib/utils";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-/** Renders bare URLs and [label](url) as real links; everything else stays text. */
+/**
+ * Renders the Markdown subset the model actually produces: links, bare
+ * URLs, **bold** and `code`. Everything else stays literal text.
+ *
+ * Bold matters more than it looks — the model reaches for it on exactly
+ * the things a reader most needs to pick out of a paragraph: an email
+ * address, a phone number, a price. Left unhandled it renders as
+ * "**hello@mabyconnect.com**", asterisks and all.
+ */
 function RichText({ text }: { text: string }) {
-  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|https?:\/\/[^\s<>)]+)/g);
+  const parts = text.split(
+    /(\[[^\]\n]+\]\([^)\s]+\)|\*\*[^*\n]+\*\*|`[^`\n]+`|https?:\/\/[^\s<>)]+)/g,
+  );
 
   return (
     <>
       {parts.map((part, i) => {
-        const md = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
+        const bold = /^\*\*([^*\n]+)\*\*$/.exec(part);
+        if (bold) {
+          return (
+            <strong key={i} className="font-semibold text-white">
+              {bold[1]}
+            </strong>
+          );
+        }
+
+        const code = /^`([^`\n]+)`$/.exec(part);
+        if (code) {
+          return (
+            <code
+              key={i}
+              className="rounded bg-white/10 px-1 py-0.5 font-mono text-[0.9em]"
+            >
+              {code[1]}
+            </code>
+          );
+        }
+
+        const md = /^\[([^\]\n]+)\]\(([^)\s]+)\)$/.exec(part);
         if (md) {
           return (
             <a

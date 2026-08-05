@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { isConfigured, respond } from "@/lib/assistant/engine";
+import { toWhatsAppText } from "@/lib/assistant/format";
 import { appendTurn, resetSession } from "@/lib/assistant/sessions";
 
 export const runtime = "nodejs";
@@ -45,8 +46,10 @@ async function send(to: string, text: string) {
   const phoneId = process.env.WHATSAPP_PHONE_NUMBER_ID;
   if (!token || !phoneId) return;
 
-  // WhatsApp caps text bodies at 4096 characters.
-  const body = text.length > 4000 ? `${text.slice(0, 3990)}…` : text;
+  // WhatsApp caps text bodies at 4096 characters. Trim before converting,
+  // so a cut can't land inside a link we're about to flatten.
+  const trimmed = text.length > 4000 ? `${text.slice(0, 3990)}…` : text;
+  const body = toWhatsAppText(trimmed);
 
   const res = await fetch(`${GRAPH}/${phoneId}/messages`, {
     method: "POST",
