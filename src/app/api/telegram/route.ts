@@ -8,11 +8,13 @@ export const dynamic = "force-dynamic";
 /* ============================================================
    Telegram webhook.
 
-   Setup (once, from a terminal):
+   Setup (once): open in any browser, phone included —
 
-     curl -X POST "https://api.telegram.org/bot<TOKEN>/setWebhook" \
-       -d "url=https://mabyconnect.site/api/telegram" \
-       -d "secret_token=<TELEGRAM_WEBHOOK_SECRET>"
+     /api/telegram/setup?secret=<TELEGRAM_WEBHOOK_SECRET>
+
+   That registers the webhook server-side. Until it runs, Telegram has
+   nowhere to deliver messages and the bot is silent even though every
+   environment variable is set correctly.
 
    Environment:
      TELEGRAM_BOT_TOKEN      — from @BotFather
@@ -131,11 +133,22 @@ export async function POST(request: Request) {
 
 /** Lets you confirm the route is deployed before pointing Telegram at it. */
 export async function GET() {
+  const hasBotToken = Boolean(process.env.TELEGRAM_BOT_TOKEN);
+  const hasWebhookSecret = Boolean(process.env.TELEGRAM_WEBHOOK_SECRET);
+  const configured = isConfigured();
+
   return NextResponse.json({
     channel: "telegram",
-    ready: Boolean(process.env.TELEGRAM_BOT_TOKEN) && isConfigured(),
-    hasBotToken: Boolean(process.env.TELEGRAM_BOT_TOKEN),
-    hasWebhookSecret: Boolean(process.env.TELEGRAM_WEBHOOK_SECRET),
-    hasApiKey: isConfigured(),
+    ready: hasBotToken && configured,
+    hasBotToken,
+    hasWebhookSecret,
+    hasApiKey: configured,
+    // These flags only prove the environment is set. Telegram still has to be
+    // told where to deliver messages, and until it is the bot stays silent —
+    // so say so here rather than leaving "ready: true" looking like the end.
+    nextStep:
+      hasBotToken && hasWebhookSecret && configured
+        ? "Register the webhook once: /api/telegram/setup?secret=<TELEGRAM_WEBHOOK_SECRET>"
+        : "Set the missing variables above in Vercel, then redeploy.",
   });
 }
