@@ -12,7 +12,7 @@ export default function CommunitiesPreview() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <Reveal className="flex items-center gap-4">
-              <span className="font-mono text-xs text-gold">004</span>
+              <span className="font-mono text-xs text-gold">006</span>
               <span className="h-px w-10 bg-line-strong" />
               <span className="eyebrow">The Communities</span>
             </Reveal>

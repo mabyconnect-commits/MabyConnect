@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { nav, socials, site } from "@/lib/site";
+import { X } from "lucide-react";
+import { nav, primaryNav, socials, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 import Logo from "@/components/ui/Logo";
 import Wordmark from "@/components/ui/Wordmark";
@@ -30,11 +31,23 @@ export default function Navbar() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-[80] transition-all duration-500",
+          // z-index must stay ABOVE the overlay menu (z-85): this header creates
+          // a stacking context, so the close button inside it can never paint
+          // above the overlay on its own.
+          "fixed inset-x-0 top-0 z-[90] transition-all duration-500",
           scrolled || open ? "py-3" : "py-5",
           // Once the page scrolls, back the bar so content passing underneath
           // never collides with the wordmark.
@@ -63,7 +76,7 @@ export default function Navbar() {
                 scrolled ? "glass border-line" : "border-transparent",
               )}
             >
-              {nav.slice(1, 8).map((item) => {
+              {primaryNav.map((item) => {
                 const active = pathname === item.href;
                 return (
                   <Link
@@ -131,9 +144,11 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-[85] bg-ink/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[85] overflow-y-auto overscroll-contain bg-ink/95 backdrop-blur-xl lg:hidden"
           >
-            <div className="container-x flex h-full flex-col justify-center pt-24 pb-12">
+            {/* min-h-dvh + justify-center centres a short menu but lets a long
+                one grow and scroll, instead of clipping items off the top. */}
+            <div className="container-x flex min-h-dvh flex-col justify-center pt-28 pb-16">
               <nav className="flex flex-col">
                 {nav.map((item, i) => (
                   <motion.div
@@ -162,7 +177,7 @@ export default function Navbar() {
                         {item.label}
                       </span>
                       <span className="font-mono text-xs text-faint">
-                        0{i + 1}
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                     </Link>
                   </motion.div>
@@ -188,6 +203,15 @@ export default function Navbar() {
                 ))}
               </motion.div>
               <p className="mt-6 text-sm text-faint">{site.email}</p>
+
+              {/* Always-reachable way out, even after scrolling a long menu. */}
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="mt-10 inline-flex w-full items-center justify-center gap-2 rounded-full border border-line-strong py-3.5 text-sm text-white/70 transition-colors hover:border-white hover:text-white"
+              >
+                <X className="h-4 w-4" /> Close menu
+              </button>
             </div>
           </motion.div>
         )}

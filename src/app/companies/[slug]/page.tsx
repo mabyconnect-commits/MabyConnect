@@ -8,6 +8,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import ArrowLink from "@/components/ui/ArrowLink";
 import CompanyLogo from "@/components/ui/CompanyLogo";
 import { companies } from "@/lib/data";
+import { findPathForCompany } from "@/lib/paths";
 
 export function generateStaticParams() {
   return companies.map((c) => ({ slug: c.slug }));
@@ -36,6 +37,7 @@ export default async function CompanyPage({
   const company = companies.find((c) => c.slug === slug);
   if (!company) notFound();
 
+  const guidedPath = findPathForCompany(slug);
   const index = companies.findIndex((c) => c.slug === slug);
   const next = companies[(index + 1) % companies.length];
 
@@ -125,6 +127,33 @@ export default async function CompanyPage({
           </div>
         </div>
       </Reveal>
+
+      {/* Guided path into this venture */}
+      {guidedPath && (
+        <Reveal delay={0.1}>
+          <div className="container-x mt-10">
+            <Link
+              href={`/start/${guidedPath.slug}`}
+              className="group flex flex-col gap-5 rounded-3xl border border-line bg-surface/40 p-7 transition-colors duration-500 hover:border-gold/40 hover:bg-surface sm:flex-row sm:items-center sm:justify-between md:p-9"
+            >
+              <div>
+                <p className="eyebrow">Not sure where to start?</p>
+                <p className="display mt-3 text-xl text-white md:text-2xl">
+                  “{guidedPath.intent}”
+                </p>
+                <p className="mt-3 max-w-xl text-sm leading-relaxed text-mist">
+                  {guidedPath.steps.length} questions and you&apos;ll have a route
+                  that fits your budget, timeline and experience.
+                </p>
+              </div>
+              <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-line-strong px-6 py-3 text-sm text-white transition-colors group-hover:border-gold group-hover:text-gold">
+                Find my route
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+            </Link>
+          </div>
+        </Reveal>
+      )}
 
       {/* Body */}
       <section className="container-x grid gap-12 py-20 md:grid-cols-[1fr_0.7fr] md:gap-20 md:py-28">
