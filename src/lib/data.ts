@@ -112,7 +112,7 @@ export const companies: Company[] = [
       "Raw & ready-made dishes",
       "Tailored to your needs",
     ],
-    url: "https://whygroceries.store",
+    url: "https://www.whygroceries.store",
     logo: "/logos/groceries.png",
   },
   {
@@ -135,7 +135,7 @@ export const companies: Company[] = [
       "Business & strategy",
       "Faith & personal growth",
     ],
-    url: "https://mabyacademy.site",
+    url: "https://mabyacademy.online",
     // The Academy carries the Maby Connect mark as its own logo.
     logo: "/logo/maby-icon-transparent.svg",
     accent: true,
