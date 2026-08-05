@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { isConfigured, respond } from "@/lib/assistant/engine";
+import { toTelegramHtml } from "@/lib/assistant/format";
 import { appendTurn, resetSession } from "@/lib/assistant/sessions";
 
 export const runtime = "nodejs";
@@ -37,15 +38,19 @@ async function send(chatId: number, text: string) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   if (!token) return;
 
-  // Telegram hard-caps messages at 4096 characters.
-  const body = text.length > 4000 ? `${text.slice(0, 3990)}…` : text;
+  // Telegram hard-caps messages at 4096 characters. Trim the Markdown
+  // *before* converting it: trimming afterwards could cut a tag in half
+  // and Telegram rejects the whole message on malformed HTML. Converting
+  // second is safe because a severed "**" simply never pairs up.
+  const trimmed = text.length > 4000 ? `${text.slice(0, 3990)}…` : text;
 
   const res = await fetch(`${API}/bot${token}/sendMessage`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       chat_id: chatId,
-      text: body,
+      text: toTelegramHtml(trimmed),
+      parse_mode: "HTML",
       disable_web_page_preview: true,
     }),
   });
