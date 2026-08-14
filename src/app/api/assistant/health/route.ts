@@ -36,6 +36,15 @@ function secretMatches(given: string, expected: string) {
 function diagnose(status: number | undefined, message: string) {
   const m = message.toLowerCase();
 
+  // Arrives as a 400 invalid_request_error, not a 401, so it has to be
+  // matched on the message or it falls through to "unknown" — which is
+  // exactly what happened the first time this fired in production.
+  if (m.includes("organization has been disabled") || m.includes("account has been disabled")) {
+    return {
+      reason: "account_disabled",
+      fix: "The Anthropic organization behind this key has been disabled — neither the key nor the credit balance is the problem. Sign in at console.anthropic.com and contact Anthropic support; no change to Vercel will fix it.",
+    };
+  }
   if (m.includes("credit balance") || m.includes("insufficient")) {
     return {
       reason: "no_credit",
